@@ -1,0 +1,19 @@
+# Dependencies and generated files
+node_modules/
+**/node_modules/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Private runtime data
+research/01_resume_intelligence/data/
+*.sqlite
+*.sqlite3
+*.db
+*.jsonl
+
+# Build outputs
+dist/
+build/
