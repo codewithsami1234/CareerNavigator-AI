@@ -1,0 +1,18 @@
+{
+  "_comment": "Heading aliases per canonical section. Edit freely: matching is case-insensitive, '&' is treated as 'and', and trailing ':' / decorations are ignored. Sections marked 'extra' are not in the Phase 1 spec but stop their text from bleeding into the previous section.",
+  "contact": ["contact", "contact information", "contact info", "contact details", "personal information", "personal details", "personal info"],
+  "summary": ["summary", "professional summary", "career summary", "executive summary", "summary of qualifications", "profile", "professional profile", "career profile", "objective", "career objective", "career objectives", "professional objective", "about me", "about", "personal statement"],
+  "skills": ["skills", "technical skills", "key skills", "core skills", "core competencies", "competencies", "technical proficiencies", "technical expertise", "technical competencies", "skills and tools", "tools and technologies", "technologies", "skills summary", "areas of expertise", "it skills", "computer skills", "soft skills", "programming languages", "skills and abilities"],
+  "education": ["education", "academic background", "academic qualifications", "academic qualification", "educational qualifications", "educational qualification", "education and qualifications", "academic profile", "qualifications", "academics", "educational background", "academic record", "education and training"],
+  "experience": ["experience", "work experience", "professional experience", "employment history", "employment", "work history", "career history", "internships", "internship", "internship experience", "relevant experience", "professional background", "industry experience", "experience and internships"],
+  "projects": ["projects", "personal projects", "academic projects", "key projects", "selected projects", "project experience", "technical projects", "side projects", "final year project", "final year projects", "notable projects"],
+  "certifications": ["certifications", "certification", "certificates", "licenses and certifications", "licenses", "professional certifications", "certifications and licenses"],
+  "courses": ["courses", "training", "trainings", "courses and training", "training and courses", "online courses", "professional development", "workshops", "training and workshops", "courses and certifications", "course and certificates", "courses and certificates"],
+  "achievements": ["achievements", "accomplishments", "awards", "honors and awards", "honours and awards", "awards and honors", "awards and achievements", "achievements and awards", "honors", "honours"],
+  "languages": ["languages", "language skills", "spoken languages", "language proficiency"],
+  "interests": ["interests", "hobbies", "hobbies and interests", "interests and hobbies", "extracurricular activities", "activities", "academic interest", "academic interests"],
+  "references": ["references", "referees"],
+  "declaration": ["declaration"],
+  "publications": ["publications", "research publications"],
+  "volunteering": ["volunteer experience", "volunteering", "volunteer work", "leadership and activities"]
+}
