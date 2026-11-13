@@ -1,0 +1,9 @@
+Skills
+Python, SQL, Git
+
+Experience
+Data Analyst, Sample Analytics Co. (2020 - 2022)
+- Wrote SQL queries and Python scripts to clean data
+
+Education
+Master of Science in Data Science, Example University (2018 - 2020)

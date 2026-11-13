@@ -1,0 +1,61 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+env/
+*.egg-info/
+.coverage
+htmlcov/
+
+# ---- Secrets (never commit) ----
+.env
+.env.*
+!.env.example
+
+# ---- Frontend build output ----
+frontend/node_modules/
+frontend/dist/
+*.key
+*.pem
+secrets.*
+credentials*.json
+
+# ---- Private resumes and datasets (never commit real resumes) ----
+private_resumes/
+**/private_resumes/
+resumes_private/
+my_resumes/
+real_resumes/
+datasets/*
+!datasets/README.md
+# Resume-like binary files are ignored everywhere ...
+*.pdf
+*.docx
+*.doc
+# ... except the synthetic test fixtures that ship with the project
+!research/01_resume_intelligence/tests/fixtures/*.pdf
+!frontend/public/samples/*.pdf
+!research/01_resume_intelligence/tests/fixtures/*.docx
+
+# Account database and the local development mailbox. Never commit these.
+research/01_resume_intelligence/data/
+
+# ---- Generated outputs ----
+outputs/
+output/
+results/
+*_analysis.json
+report*.json
+
+# ---- Editor / OS ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+# Private runtime databases and logs
+*.sqlite
+*.sqlite3
+*.db
+*.jsonl

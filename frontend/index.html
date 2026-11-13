@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/jpeg" href="/logo.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#F8F3E9" />
+    <title>CareerNavigator AI</title>
+    <script>
+      try {
+        var theme = localStorage.getItem("careernavigator.theme")
+        if (theme !== "dark" && theme !== "light") {
+          var raw = localStorage.getItem("careernavigator.workspace.v1")
+          theme = raw ? JSON.parse(raw).theme : "light"
+        }
+        if (theme === "dark") document.documentElement.classList.add("dark")
+      } catch (error) {
+        document.documentElement.classList.remove("dark")
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

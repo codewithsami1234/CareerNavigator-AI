@@ -1,0 +1,86 @@
+{
+  "_comment": "Headings for job descriptions. 'requirements' means required and 'preferred' means preferred. 'promotional' is ignored (benefits, company ads). Every other section leaves priority unspecified unless the line itself says required or preferred. Matching is the same as resume headings: case-insensitive, '&' is 'and', trailing decoration is ignored.",
+  "requirements": [
+    "requirements",
+    "requirement",
+    "required qualifications",
+    "required qualification",
+    "required skills",
+    "required experience",
+    "required technical skills",
+    "minimum qualifications",
+    "minimum qualification",
+    "minimum requirements",
+    "basic qualifications",
+    "educational requirements",
+    "must have",
+    "what you will need",
+    "what you'll need"
+  ],
+  "preferred": [
+    "preferred",
+    "preferred qualifications",
+    "preferred qualification",
+    "preferred skills",
+    "preferred experience",
+    "nice to have",
+    "nice-to-have",
+    "good to have",
+    "bonus",
+    "bonus skills",
+    "desired qualifications",
+    "desired skills"
+  ],
+  "qualifications": [
+    "qualifications",
+    "qualification",
+    "education",
+    "education and qualifications"
+  ],
+  "responsibilities": [
+    "responsibilities",
+    "responsibility",
+    "duties",
+    "key duties",
+    "what you will do",
+    "what you'll do",
+    "job duties"
+  ],
+  "skills": [
+    "skills",
+    "technical skills",
+    "tech stack",
+    "tools"
+  ],
+  "background": [
+    "experience",
+    "about the role",
+    "about the job",
+    "overview",
+    "summary",
+    "the role",
+    "who you are"
+  ],
+  "promotional": [
+    "benefits",
+    "benefit",
+    "perks",
+    "perk",
+    "perks and benefits",
+    "benefits and perks",
+    "what we offer",
+    "what you'll get",
+    "what you will get",
+    "compensation",
+    "compensation and benefits",
+    "why join",
+    "why join us",
+    "about the company",
+    "about us",
+    "about our company",
+    "who we are",
+    "our culture",
+    "what we provide",
+    "employee benefits"
+  ]
+}
