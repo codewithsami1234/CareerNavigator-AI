@@ -273,6 +273,59 @@ describe("evidence helpers", () => {
     expect(screen.getByText(/not resume evidence/i)).toBeInTheDocument()
   })
 
+  it("asks the AI Coach and shows explanations and interview questions", async () => {
+    serverWorkspace = {
+      theme: "light",
+      resume: { status: "success", file_name: "example.txt", skills: [] },
+      career: {
+        roadmap: {
+          status: "success",
+          milestones: [{ title: "SQL", objective: "Be able to use SQL.", kind: "missing_required", source: "suggestion" }],
+          limitations: [],
+        },
+      },
+    }
+    const coachCalls: unknown[] = []
+    vi.stubGlobal("fetch", vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
+      if (String(input).includes("/api/ai-coach")) {
+        coachCalls.push(JSON.parse(String(init?.body)))
+        return jsonResponse({
+          status: "success",
+          summary: "Strong base. Learn SQL next.",
+          milestones: [{ title: "SQL", why_it_matters: "The posting requires SQL.", tips: ["Build a small database"] }],
+          interview_questions: [{ skill: "SQL", question: "How would you find duplicate rows?", good_answer_covers: "GROUP BY and HAVING." }],
+          model: "test-model",
+          disclaimer: "AI-generated guidance.",
+        })
+      }
+      return answerKnown(input, init) ?? new Response("not found", { status: 404 })
+    }))
+    renderAt("/career-roadmap")
+    await userEvent.click(await screen.findByRole("button", { name: /ask ai coach/i }))
+    expect(await screen.findByText("Strong base. Learn SQL next.")).toBeInTheDocument()
+    expect(screen.getByText("How would you find duplicate rows?")).toBeInTheDocument()
+    expect(screen.getByText("The posting requires SQL.")).toBeInTheDocument()
+    expect(coachCalls).toHaveLength(1)
+    expect(coachCalls[0]).toMatchObject({ resume: { file_name: "example.txt" } })
+  })
+
+  it("explains when the AI Coach is not configured", async () => {
+    serverWorkspace = {
+      theme: "light",
+      resume: { status: "success", file_name: "example.txt", skills: [] },
+      career: { roadmap: { status: "success", milestones: [{ title: "SQL", kind: "missing_required" }], limitations: [] } },
+    }
+    vi.stubGlobal("fetch", vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
+      if (String(input).includes("/api/ai-coach")) {
+        return jsonResponse({ status: "unavailable", reason: "AI Coach is not configured on this server." })
+      }
+      return answerKnown(input, init) ?? new Response("not found", { status: 404 })
+    }))
+    renderAt("/career-roadmap")
+    await userEvent.click(await screen.findByRole("button", { name: /ask ai coach/i }))
+    expect(await screen.findByText(/not configured on this server/i)).toBeInTheDocument()
+  })
+
   it("shows partial support on the skill-gap page", async () => {
     serverWorkspace = {
       theme: "light",

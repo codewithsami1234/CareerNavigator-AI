@@ -32,6 +32,7 @@ class TestHealth:
             "status": "ok",
             "service": "CareerNavigator AI",
             "scoring": "rule-based readiness estimate",
+            "ai_coach": False,
         }
         assert allowed.headers["access-control-allow-origin"] == ORIGIN
         blocked = client.get("/api/health", headers={"Origin": "https://evil.example"})

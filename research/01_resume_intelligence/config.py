@@ -140,6 +140,27 @@ METHOD_NATIVE_DOCX = "native_docx"
 METHOD_NATIVE_TEXT = "native_text"
 METHOD_OCR = "ocr"
 
+# ---- Optional AI Coach (LLM) ----------------------------------------------
+# Any OpenAI-compatible chat-completions API works (Meta Model API, Gemini's
+# OpenAI endpoint, Groq, OpenRouter, ...). All three values come from the
+# environment and are read per request, so the key is never stored here.
+AI_DEFAULT_TIMEOUT_SECONDS = 45
+
+
+def ai_settings() -> dict:
+    """Return the AI Coach settings. Empty strings mean "not configured"."""
+    try:
+        timeout = float(os.environ.get("AI_TIMEOUT_SECONDS", "") or AI_DEFAULT_TIMEOUT_SECONDS)
+    except ValueError:
+        timeout = AI_DEFAULT_TIMEOUT_SECONDS
+    return {
+        "api_base": os.environ.get("AI_API_BASE", "").strip(),
+        "api_key": os.environ.get("AI_API_KEY", "").strip(),
+        "model": os.environ.get("AI_MODEL", "").strip(),
+        "timeout": max(5.0, min(timeout, 120.0)),
+    }
+
+
 # ---- Local HTTP API --------------------------------------------------------
 # Used only by the optional FastAPI process. Streamlit does not read these.
 # A wildcard origin is never accepted. Set CAREERNAV_CORS_ORIGINS to a
