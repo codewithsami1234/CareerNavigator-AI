@@ -1,4 +1,4 @@
-import type { CareerReport, GitHubAnalysis, JobAnalysis, ReportBundle, ResumeAnalysis } from "./types"
+import type { AICoachResult, CareerReport, GitHubAnalysis, JobAnalysis, ReportBundle, ResumeAnalysis } from "./types"
 
 const base = (import.meta.env.VITE_API_BASE ?? "").replace(/\/$/, "")
 
@@ -118,6 +118,22 @@ export async function buildCareerReport(input: {
     github: input.github,
     weekly_hours: input.weeklyHours,
   })) as CareerReport
+}
+
+export async function askAICoach(input: {
+  resume: ResumeAnalysis
+  job: JobAnalysis | null
+  github: GitHubAnalysis | null
+  weeklyHours: number | null
+  targetCareer: string
+}): Promise<AICoachResult> {
+  return (await postJson("/api/ai-coach", {
+    resume: input.resume,
+    job: input.job,
+    github: input.github,
+    weekly_hours: input.weeklyHours,
+    target_career: input.targetCareer,
+  }, 60000)) as AICoachResult
 }
 
 export async function buildReport(input: {

@@ -278,6 +278,16 @@ export type CareerReport = {
   limitations?: string[]
 }
 
+export type AICoachResult = {
+  status: "success" | "unavailable" | "failed" | string
+  reason?: string | null
+  summary?: string | null
+  milestones?: { title: string; why_it_matters: string; tips?: string[] }[]
+  interview_questions?: { skill: string; question: string; good_answer_covers: string }[]
+  model?: string | null
+  disclaimer?: string
+}
+
 export type ReportBundle = {
   status: string
   analysis_status?: string
