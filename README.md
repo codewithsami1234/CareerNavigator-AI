@@ -1,256 +1,116 @@
-# CareerNavigator AI 🚀
-### An AI-Powered Career Intelligence Platform
+# CareerNavigator AI
 
-CareerNavigator AI is a career intelligence platform designed to help job seekers understand their professional strengths, evaluate their skills, identify career gaps, and make informed career decisions.
+An explainable career-intelligence workspace for students, graduates, and developers. It reads a resume, compares that resume with a job description you paste, lists the skill gaps, optionally reads a public GitHub profile, and turns those results into a roadmap and a downloadable report.
 
-The platform analyzes resumes, compares candidate skills against job descriptions, evaluates GitHub profiles, and generates personalized career improvement roadmaps.
+The analysis is rule-based. It is not a trained hiring model, and the readiness number is not an ATS score or a prediction that someone will be hired. Guidance added on top of a comparison explains mention-only matches, related skills, and category labels. It uses the same objects and does not calculate a second score.
 
-Our goal is to make career planning more accessible, practical, and data-driven.
+This repository is prepared for **Arbiter Hacks V1, General Track**, as a solo project. It has not been deployed to a public host.
 
----
+## What you are running
 
-## ✨ Key Features
-
-### 📄 Resume Intelligence
-- Upload and analyze resumes.
-- Extract relevant information and skills.
-- Identify skills mentioned and supported by resume evidence.
-- Review professional strengths and areas for improvement.
-
-### 🎯 Job Description Matching
-- Compare your resume against job descriptions.
-- Identify matching and missing skills.
-- Understand your suitability for a target role.
-- Receive recommendations for improving your job readiness.
-
-### 📊 Skill Gap Analysis
-- Identify skills required for your target career.
-- Compare existing skills with job requirements.
-- Highlight areas that need improvement.
-- Get actionable learning recommendations.
-
-### 💻 GitHub Intelligence
-- Analyze publicly available GitHub profile information.
-- Explore repositories and programming activity.
-- Identify technical skills demonstrated through public projects.
-- Gain additional insight into your developer profile.
-
-### 🗺️ Personalized Career Roadmap
-- Generate structured career improvement plans.
-- Organize skill-development priorities.
-- Follow actionable recommendations.
-- Track your progress toward career goals.
-
-### 📑 Reports and Dashboard
-- Access career analysis results.
-- Review skill insights and job matching information.
-- Explore your career readiness indicators.
-- Manage your workspace.
-
----
-
-## 🛠️ Technology Stack
-
-The project uses the following technologies:
-
-| Component | Technology |
+| Piece | Role |
 |---|---|
-| Frontend | React.js |
-| Frontend tooling | Vite |
-| Backend | Python |
-| API framework | FastAPI |
-| Resume processing | PyMuPDF / python-docx |
-| Image processing | OpenCV |
-| OCR | Tesseract |
-| Data processing | Python |
-| Database | SQLite |
-| Deployment | Docker |
+| `research/01_resume_intelligence` | Resume parser, OCR, job comparison, GitHub client, readiness, roadmap, FastAPI, and the original Streamlit page |
+| `frontend` | React workspace that calls that API |
+| `PROJECT_AUDIT.md` | Earlier audit of the resume engine |
 
-*Technology details should be checked against the current repository before treating this list as final.*
+The React app does not reimplement parsing or scoring. `POST /api/report` copies the readiness estimate into a document. It does not calculate a second score.
 
----
+## Setup
 
-## 🏗️ Project Architecture
+Python 3.10 or newer and Node.js 22 are enough for the demo. Tesseract is required only for scanned PDFs. A GitHub token is optional.
 
-CareerNavigator AI follows a frontend-backend architecture.
-
-```text
-CareerNavigator-AI/
-│
-├── frontend/
-│   ├── src/
-│   ├── public/
-│   └── package.json
-│
-├── research/
-│   └── 01_resume_intelligence/
-│       ├── api/
-│       ├── data/
-│       ├── tests/
-│       └── ...
-│
-├── Dockerfile
-├── render.yaml
-├── .gitignore
-└── README.md
+```powershell
+cd "research\01_resume_intelligence"
+py -3 -m pip install -r requirements.txt
 ```
 
-The React frontend communicates with the Python backend through API endpoints. The backend handles resume analysis, job matching, skill intelligence, and related processing.
+If `python` is on your `PATH`, use `python` instead of `py -3`.
 
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-Install the following:
-
-- Python 3.10 or compatible version supported by the project
-- Node.js and npm
-- Git
-- Tesseract OCR (for OCR functionality)
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/codewithsami1234/CareerNavigator-AI.git
-```
-
-```bash
-cd CareerNavigator-AI
-```
-
-### 2. Set Up the Backend
-
-Navigate to the backend directory:
-
-```bash
-cd research/01_resume_intelligence
-```
-
-Create a virtual environment:
-
-```bash
-python -m venv .venv
-```
-
-Activate it on Windows:
-
-```cmd
-.venv\Scripts\activate
-```
-
-Install dependencies using the repository's actual requirements file:
-
-```bash
-pip install -r requirements.txt
-```
-
-Start the backend using the project's configured API entry point:
-
-```bash
-python -m uvicorn api.app:app --reload --port 8000
-```
-
-### 3. Set Up the Frontend
-
-Open another terminal from the project root:
-
-```bash
+```powershell
 cd frontend
-```
-
-Install dependencies:
-
-```bash
 npm install
 ```
 
-Start the development server:
+Optional environment variables are listed in [`.env.example`](.env.example) and [`frontend/.env.example`](frontend/.env.example). The demo does not need them.
 
-```bash
+## Start
+
+Use two terminals. Both stay running.
+
+**API** — from `research\01_resume_intelligence`:
+
+```powershell
+py -3 -m uvicorn api.app:app --host 127.0.0.1 --port 8000
+```
+
+**Workspace** — from `frontend`:
+
+```powershell
 npm run dev
 ```
 
-The frontend and backend should now be available locally according to their configured ports.
+Open [http://localhost:5173](http://localhost:5173). The workspace routes are `/dashboard`, `/resume-analyzer`, `/job-matcher`, `/skill-gap`, `/github-intelligence`, `/career-roadmap`, `/reports`, and `/settings`. Older `/app/...` addresses redirect to those pages.
 
----
+The Vite server proxies `/api` to `http://127.0.0.1:8000`. `npm run preview` uses the same proxy and the same port, so stop `npm run dev` first. Interactive API docs are at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
 
-## 🧪 Testing
+The original Streamlit page is still available from `research\01_resume_intelligence`:
 
-The project includes automated tests for backend functionality and frontend behavior.
-
-Run backend tests from the appropriate backend directory:
-
-```bash
-python -m pytest
+```powershell
+py -3 -m streamlit run web\app.py --server.address 127.0.0.1 --server.port 8501
 ```
 
-Run frontend tests from the frontend directory:
+## Synthetic walkthrough
 
-```bash
+On Resume Analyzer, choose **Use synthetic sample** and then **Analyze resume**. The sample is the fictional Alex Morgan resume already used by the test suite. **Use synthetic PDF**, **Use synthetic DOCX**, **Use synthetic scan**, and **Use synthetic photograph** load the same fictional resume in those formats. The scan and the photograph are rendered pages, not camera photos of a real resume. The scan and the photograph turn OCR on.
+
+The job description box starts empty. On Job Matcher, choose **Load synthetic posting**, then **Read job description**, then **Compare with resume**. With the current taxonomy that posting scores **75 / 100**: Python, Django, and SQL match as required skills. Kubernetes is required and comes back **related**, not matched, because the comparison names Docker as a related skill, so it contributes 0. Docker and React are preferred and stay out of the denominator. If you change the taxonomy, trust the number and the outcome labels on the page rather than this paragraph.
+
+GitHub Intelligence can read a public profile such as `octocat`. That call needs a network connection to `api.github.com`. A rate limit or a missing user is shown as an error, and the resume result stays.
+
+## Tests
+
+```powershell
+py -3 -m pytest
+cd frontend
 npm test
 ```
 
-Build the frontend:
+## More documentation
 
-```bash
+| Guide | Path |
+|---|---|
+| Architecture | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) |
+| Features | [docs/FEATURES.md](docs/FEATURES.md) |
+| Tests | [docs/TESTING.md](docs/TESTING.md) |
+| Security notes | [docs/SECURITY.md](docs/SECURITY.md) |
+| Accounts and sign-in | [docs/AUTHENTICATION.md](docs/AUTHENTICATION.md) |
+| Troubleshooting | [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) |
+| Demo script | [docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md) |
+| Submission draft | [docs/HACKATHON_SUBMISSION.md](docs/HACKATHON_SUBMISSION.md) |
+| Engine reference | [research/01_resume_intelligence/README.md](research/01_resume_intelligence/README.md) |
+
+## Local production-style run
+
+This repository is not deployed to a public host. To serve the built workspace against the local API, keep the API running and, from `frontend`, stop the dev server first:
+
+```powershell
 npm run build
+npm run preview
 ```
 
-Refer to the latest test execution results before reporting test coverage or passing-test counts.
+Preview listens on [http://localhost:5173](http://localhost:5173) and proxies `/api` to `http://127.0.0.1:8000`. Bind the API to `127.0.0.1`. Do not publish port 8000 and describe it as a private service.
 
----
+## Known limits
 
-## 🌐 Deployment
-
-The repository includes Docker-based deployment configuration.
-
-- `Dockerfile` — container configuration.
-- `render.yaml` — Render deployment configuration.
-
-**Deployment status:** Public production deployment is not yet verified.
-
-A working public URL will be added here after successful deployment.
-
----
-
-## 🔮 Future Improvements
-
-- More advanced semantic skill matching.
-- Expanded job-market intelligence.
-- Additional resume formats and document processing.
-- More personalized career recommendations.
-- Improved GitHub project analysis.
-- Enhanced reporting and career progress tracking.
-- Integration with additional job platforms.
-
----
-
-## 🎯 Project Vision
-
-CareerNavigator AI aims to bridge the gap between a candidate's current skills and the skills demanded by the job market.
-
-Instead of simply helping people create resumes, the platform helps them understand where they stand, what they need to improve, and how to move toward their career goals.
-
-**Analyze your skills. Discover your gaps. Navigate your career.**
-
----
-
-## 👩‍💻 Contributors
-
-Developed as an academic and innovation project.
-
-Contributions, suggestions, feedback, and collaboration are welcome.
-
----
-
-## 📬 Contact
-
-GitHub: [codewithsami1234](https://github.com/codewithsami1234)
-
-Project Repository: [CareerNavigator AI](https://github.com/codewithsami1234/CareerNavigator-AI)
-
----
-
-*CareerNavigator AI — Navigate Your Future with Intelligence.*
+- Overlapping jobs can inflate a generic years-of-experience total. The comparison warns when that happens.
+- OCR was measured on synthetic rendered pages, including a PNG and a text-free PDF of the fictional Alex Morgan resume. Accuracy on camera photos and noisy scans was not measured.
+- DOCX text boxes are read. A heading that shares a table cell with other text can still sit on that cell's line.
+- PNG and JPEG resumes are accepted. They are read only when OCR is on. A photograph with OCR off returns `needs_ocr`.
+- The React workspace has accounts. Saved analysis belongs to the signed-in person. See [docs/AUTHENTICATION.md](docs/AUTHENTICATION.md). Streamlit does not sign in.
+- There is no live job board.
+- The app has not been deployed.
+- A mention-only skill can still be a match. The guidance layer calls that partial support and leaves the estimate unchanged.
+- A career-path label needs extracted skills in the mapped categories. Fewer skills produce no label.
+- Focus slots are roadmap order plus the weekly hours you typed. They are not a measured study plan.
+- Repository language counts are how many read repositories list that language. Commit history and source code are not downloaded.

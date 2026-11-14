@@ -1,0 +1,3 @@
+Sam Carter is a developer who has used Python and Docker on several
+projects and enjoys building things. Reach me at sam.carter@example.com for more details about my work history.
+He also worked with PostgreSQL and React for a small startup over a couple of years.

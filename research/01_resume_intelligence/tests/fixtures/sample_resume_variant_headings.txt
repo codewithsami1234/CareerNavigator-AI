@@ -1,0 +1,19 @@
+JORDAN LEE
+jordan.lee@example.com
+
+TECHNICAL SKILLS
+Python, Node.js, MongoDB, k8s
+
+PROFESSIONAL EXPERIENCE
+Backend Developer at Sample Systems Pvt Ltd | March 2022 - Present
+- Maintained Node.js services and MongoDB collections
+
+ACADEMIC BACKGROUND
+BS Computer Science, Demo Institute of Science (2018 - 2022)
+
+PERSONAL PROJECTS
+Chat Server
+- WebSocket chat built with Node.js
+
+LICENSES & CERTIFICATIONS
+- Certified Kubernetes Application Developer (2023)
