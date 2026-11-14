@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: careernavigator-ai
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: CAREERNAV_COOKIE_SECURE
+        value: "1"
+      - key: CAREERNAV_STATIC_DIR
+        value: /app/frontend_dist
+      # Public origin is also derived from RENDER_EXTERNAL_URL in config.py.
+      - key: CAREERNAV_CORS_ORIGINS
+        sync: false

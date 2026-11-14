@@ -1,0 +1,237 @@
+/* CareerNavigator AI — branded blocks. */
+
+.cn-brand {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin: 0.15rem 0.15rem 0.85rem;
+}
+
+.cn-mark {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    border-radius: 13px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(145deg, #4776ff, #8057f5);
+    box-shadow: 0 8px 16px rgba(71, 118, 255, 0.35);
+}
+
+.cn-brand strong {
+    display: block;
+    color: #ffffff;
+    font-size: 0.98rem;
+    letter-spacing: -0.02em;
+}
+
+.cn-brand span {
+    display: block;
+    color: #a9b6cb;
+    font-size: 0.75rem;
+}
+
+.cn-user {
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+    margin: 0.4rem 0.1rem 0.2rem;
+    padding: 0.7rem 0.75rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cn-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #24344f;
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.cn-user strong, .cn-user span {
+    display: block;
+}
+
+.cn-user span {
+    color: #a9b6cb;
+    font-size: 0.75rem;
+}
+
+.cn-kicker {
+    margin: 0 0 0.2rem;
+    color: #4776ff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.cn-hello {
+    margin: 0;
+    color: #172033;
+    font-size: 1.35rem;
+    font-weight: 680;
+    letter-spacing: -0.03em;
+}
+
+.cn-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.35rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid #e6ebf5;
+    color: #172033;
+    font-size: 0.82rem;
+    box-shadow: 0 6px 16px rgba(16, 24, 40, 0.04);
+}
+
+.cn-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #16a37a;
+}
+
+.cn-hero {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0.2rem 0 1rem;
+    padding: 1.45rem 1.5rem;
+    border-radius: 22px;
+    color: #ffffff;
+    background: linear-gradient(120deg, #17243a 0%, #24386a 46%, #5a4ad4 100%);
+    box-shadow: 0 18px 40px rgba(23, 36, 58, 0.18);
+}
+
+.cn-hero h2 {
+    margin: 0.15rem 0 0.4rem;
+    color: #ffffff;
+    font-size: 1.85rem;
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+}
+
+.cn-hero p {
+    margin: 0;
+    max-width: 38rem;
+    color: rgba(255, 255, 255, 0.86);
+}
+
+.cn-hero .cn-kicker {
+    color: #d9e2ff;
+}
+
+.cn-orb {
+    width: 148px;
+    height: 148px;
+    flex: 0 0 148px;
+    border-radius: 36px;
+    background:
+        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.85), transparent 28%),
+        radial-gradient(circle at 70% 60%, #8ea2ff, transparent 42%),
+        linear-gradient(160deg, rgba(255, 255, 255, 0.18), rgba(128, 87, 245, 0.2));
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    animation: cn-drift 14s ease-in-out infinite;
+}
+
+@keyframes cn-drift {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+.cn-section {
+    margin: 0 0 0.35rem;
+    color: #172033;
+    font-weight: 700;
+}
+
+.cn-empty {
+    margin: 0.4rem 0 0.8rem;
+    padding: 1.1rem 1.15rem;
+    border-radius: 16px;
+    background: #ffffff;
+    border: 1px dashed #d5deee;
+}
+
+.cn-empty strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: #172033;
+}
+
+.cn-empty p {
+    margin: 0;
+    color: #778197;
+}
+
+.cn-group {
+    margin: 0.8rem 0 0.35rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    display: inline-block;
+    font-weight: 700;
+}
+
+.cn-ok { background: rgba(22, 163, 122, 0.12); color: #0e7a59; }
+.cn-bad { background: rgba(228, 93, 105, 0.12); color: #b42336; }
+.cn-violet { background: #f0edff; color: #5b3cc4; }
+.cn-neutral { background: #f3f5f8; color: #526074; }
+
+.cn-ring-wrap {
+    width: 118px;
+    height: 118px;
+    margin: 0.2rem 0 0.6rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: conic-gradient(#4776ff calc(var(--p) * 1%), #e7ecf5 0);
+}
+
+.cn-ring-wrap span {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #ffffff;
+    color: #172033;
+    font-size: 1.45rem;
+    font-weight: 720;
+}
+
+.cn-mile {
+    margin: 0 0 0.15rem;
+    color: #4776ff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+@media (max-width: 800px) {
+    .cn-hero {
+        flex-direction: column;
+    }
+
+    .cn-orb {
+        width: 92px;
+        height: 92px;
+        flex-basis: 92px;
+    }
+
+    .cn-hero h2 {
+        font-size: 1.45rem;
+    }
+}
