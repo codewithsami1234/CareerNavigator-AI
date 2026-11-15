@@ -68,6 +68,20 @@ The job description box starts empty. On Job Matcher, choose **Load synthetic po
 
 GitHub Intelligence can read a public profile such as `octocat`. That call needs a network connection to `api.github.com`. A rate limit or a missing user is shown as an error, and the resume result stays.
 
+## AI Coach (optional LLM)
+
+The Roadmap page has an **AI Coach** panel. After a resume is compared with a job description, it asks a language model to explain why each roadmap milestone matters, suggest practical tips, and write interview questions aimed at the skill gaps.
+
+- The rule-based pipeline stays the source of truth. The coach never changes the readiness estimate, and explanations for milestones the pipeline did not produce are dropped.
+- Only skill names, requirement outcomes, and milestone text are sent. Names, contact details, and raw resume text are not.
+- Any OpenAI-compatible chat-completions API works. Set `AI_API_BASE`, `AI_API_KEY`, and `AI_MODEL` (see [.env.example](.env.example)). Without them the panel says the coach is not configured and the rest of the app is unchanged.
+
+```powershell
+$env:AI_API_BASE = "https://api.groq.com/openai/v1"   # or your provider's OpenAI-compatible base URL
+$env:AI_API_KEY  = "<your key>"
+$env:AI_MODEL    = "<model id from your provider>"
+```
+
 ## Tests
 
 ```powershell

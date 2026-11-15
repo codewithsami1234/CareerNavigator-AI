@@ -14,3 +14,10 @@ services:
       # Public origin is also derived from RENDER_EXTERNAL_URL in config.py.
       - key: CAREERNAV_CORS_ORIGINS
         sync: false
+      # Optional AI Coach. Set these in the Render dashboard, never in this file.
+      - key: AI_API_BASE
+        sync: false
+      - key: AI_API_KEY
+        sync: false
+      - key: AI_MODEL
+        sync: false

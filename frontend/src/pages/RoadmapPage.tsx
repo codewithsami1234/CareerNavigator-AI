@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { AICoachPanel } from "../components/AICoachPanel"
 import { GuidancePanels } from "../components/views"
 import { Alert, Card, EmptyState, Field, inputClass } from "../components/ui"
 import { CAREER_GOALS } from "../demo"
@@ -77,6 +78,7 @@ export function RoadmapPage() {
               )
             })}
           </ol>
+          <AICoachPanel />
           <Card>
             <h2 className="font-semibold">Limits of this plan</h2>
             <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">

@@ -24,8 +24,10 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.concurrency import run_in_threadpool
 
 import config
+from ai_coach import coach_report, is_configured as ai_coach_configured
 from accounts.db import prepare_database
 from accounts.deps import require_user
 from accounts.records import store_record
@@ -177,6 +179,7 @@ def create_app() -> FastAPI:
             "status": "ok",
             "service": "CareerNavigator AI",
             "scoring": "rule-based readiness estimate",
+            "ai_coach": ai_coach_configured(),
         }
 
     app.include_router(account_router)
@@ -333,6 +336,36 @@ def create_app() -> FastAPI:
         report = service.build_career_report(resume_analysis, job, github_analysis, weekly_hours=hours)
         body = report.to_dict()
         store_record(owner.id, "career", body)
+        return JSONResponse(status_code=200, content=body)
+
+    @app.post("/api/ai-coach")
+    async def ai_coach(request: Request):
+        """Optional LLM explanations for a career report the pipeline builds here.
+
+        The report is rebuilt from the analysis objects, so the model only sees
+        results this server produced. Readiness and milestones are unchanged.
+        """
+        owner, denied = _owner(request)
+        if denied is not None:
+            return denied
+        if not request.headers.get("content-type", "").startswith("application/json"):
+            return _failed(_REQUEST_ERRORS["json"], 415)
+        payload = await _json_object(request)
+        if payload is None:
+            return _failed(_REQUEST_ERRORS["json"], 400)
+        parsed, error = _career_inputs(payload)
+        if error is not None:
+            return error
+        target_career, label_error = _typed_label(payload, "target_career")
+        if label_error is not None:
+            return label_error
+        resume_analysis, job, github_analysis, hours = parsed
+        career = service.build_career_report(resume_analysis, job, github_analysis, weekly_hours=hours)
+        result = await run_in_threadpool(coach_report, career.to_dict(), target_career)
+        logger.info("ai_coach status=%s", result.status)
+        body = result.to_dict()
+        if result.status == "success":
+            store_record(owner.id, "ai_coach", body)
         return JSONResponse(status_code=200, content=body)
 
     @app.post("/api/report")
