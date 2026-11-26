@@ -1,17 +1,67 @@
-# CareerNavigator AI
+<p align="center">
+  <img src="docs/images/cover.jpg" alt="CareerNavigator AI: resume, job match, roadmap and AI Coach" width="100%">
+</p>
 
-**An AI-assisted career intelligence platform for students, graduates, and developers.**
+<h1 align="center">CareerNavigator AI</h1>
 
-CareerNavigator AI helps users understand how their current skills align with a target job, identify skill gaps, explore career development paths, and build a practical learning roadmap.
+<p align="center">
+  <b>Know where you stand for any job, and exactly what to learn next.</b><br>
+  Resume analysis, job matching, an explainable readiness score, a skill roadmap and an AI interview coach in one workspace.
+</p>
 
-The platform combines resume analysis, job-description matching, GitHub profile insights, career guidance, and downloadable reports in one workspace.
+<p align="center">
+  <a href="https://careernavigator-ai.onrender.com"><img alt="Live demo" src="https://img.shields.io/badge/live%20demo-online-2ea44f?style=flat-square"></a>
+  <a href="https://youtu.be/PtzO6zJgQ0w"><img alt="Demo video" src="https://img.shields.io/badge/demo%20video-YouTube-c4302b?style=flat-square"></a>
+  <img alt="Python" src="https://img.shields.io/badge/python-3.12-3776ab?style=flat-square">
+  <img alt="FastAPI" src="https://img.shields.io/badge/backend-FastAPI-009688?style=flat-square">
+  <img alt="React" src="https://img.shields.io/badge/frontend-React%20%2B%20TypeScript-3178c6?style=flat-square">
+  <img alt="OCR" src="https://img.shields.io/badge/OCR-Tesseract-5c6bc0?style=flat-square">
+  <img alt="AI Coach" src="https://img.shields.io/badge/AI%20Coach-Groq-f55036?style=flat-square">
+  <img alt="Docker" src="https://img.shields.io/badge/deploy-Docker%20%2F%20Render-2496ed?style=flat-square">
+</p>
+
+<p align="center">
+  <a href="https://careernavigator-ai.onrender.com"><b>Try it live</b></a> ·
+  <a href="https://youtu.be/PtzO6zJgQ0w"><b>Watch the demo</b></a> ·
+  <a href="#installation"><b>Run locally</b></a> ·
+  <a href="docs/ARCHITECTURE.md"><b>Architecture</b></a>
+</p>
 
 > **Important:** The core resume and job-matching pipeline is rule-based and explainable. It is not a trained hiring model, and its readiness estimate is not an ATS score or a prediction of employment.
 
 ---
 
+## Demo
+
+<p align="center">
+  <a href="https://youtu.be/PtzO6zJgQ0w"><img src="docs/images/demo-video.jpg" alt="Watch the CareerNavigator AI demo on YouTube" width="80%"></a>
+</p>
+
+The live app runs on Render's free tier, so the first load after a quiet period can take about a minute. Create an account, choose **Use synthetic sample** on the Resume Analyzer, then **Load synthetic posting** on the Job Matcher to see the full flow without a real resume.
+
+## Screenshots
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/images/resume.jpg" alt="Resume Analyzer"><br><sub><b>Resume Analyzer</b>: PDF, DOCX, TXT and images, with OCR for scans</sub></td>
+    <td width="50%"><img src="docs/images/readiness.jpg" alt="Readiness estimate"><br><sub><b>Readiness estimate</b>: every requirement shows its credit</sub></td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/job-match.jpg" alt="Job Matcher breakdown"><br><sub><b>Job Matcher</b>: matched, related or missing, with the reason</sub></td>
+    <td><img src="docs/images/skill-gaps.jpg" alt="Skill Gap Analysis"><br><sub><b>Skill gaps</b>: each gap backed by a line from the resume</sub></td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/ai-coach.jpg" alt="AI Coach"><br><sub><b>AI Coach</b>: why each roadmap milestone matters</sub></td>
+    <td><img src="docs/images/interview-practice.jpg" alt="Interview practice"><br><sub><b>Interview practice</b>: questions aimed at your skill gaps</sub></td>
+  </tr>
+</table>
+
+---
+
 ## Table of Contents
 
+- [Demo](#demo)
+- [Screenshots](#screenshots)
 - [Overview](#overview)
 - [Key Features](#key-features)
 - [How It Works](#how-it-works)
@@ -359,6 +409,8 @@ AI_API_KEY=your_api_key
 AI_MODEL=your_model_id
 ```
 
+The live demo uses Groq with the model `openai/gpt-oss-120b`. Model availability changes, so check your provider's model list if a request returns an error.
+
 You can use another compatible provider by supplying its correct API base URL and model identifier.
 
 Keep API keys private and out of source control.
@@ -438,7 +490,7 @@ CareerNavigator AI is an evolving project. The following limitations should be u
 - OCR accuracy on noisy camera photographs has not been established.
 - AI Coach functionality requires an external API provider and valid configuration.
 - Career-path guidance depends on the skills successfully extracted from the resume.
-- Public deployment and production hosting should not be assumed from local development instructions.
+- The public demo runs on Render's free tier: it sleeps when idle, and its SQLite database resets on each redeploy, so demo accounts are not permanent.
 
 ---
 
